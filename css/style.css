@@ -1,0 +1,86 @@
+body{
+    background-image: url("../img/BackgroundKamer.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.whiteArea{
+    width: 45%;
+    height: 450px;
+    background-color: white;
+    border-radius: 4%;
+    margin-top: 25px;
+    margin-left: 15%;
+}
+.innerContent{
+    margin: 25px;
+}
+
+.StemwijzerLogo{
+    font-weight: 600;
+    padding-top: 20px;
+}
+
+h3.SubTitle {
+    font-weight: 600;
+}
+
+.blueText{
+    color: #233fff;
+}
+
+.StartBtn{
+    margin-top: 20%;
+}
+
+.blackArea{
+    width: 60%;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.75);
+    margin-left: 25%;
+    position: absolute;
+    top: 80px;
+    z-index: -1;
+    border-radius: 4%;
+}
+
+.partijContainer {
+    padding-left: 60%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+h5{
+    color: white;
+}
+.partij {
+    background-color: white;
+    border-radius: 50%;
+    display: block;
+    padding: 2px;
+    width: 50px;
+    float: left;
+    margin-left: 16px;
+    margin-top: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.2s;
+  }
+  
+  .partij:hover {
+    box-shadow: rgba(0, 0, 0, 0.8) 0 0 5px;
+    transform: scale(1.8);
+    cursor: pointer;
+  }
+  
+  .imgFormat {
+    width: 45px;
+  }
+
+p.privacy {
+    color: white;
+    position: absolute;
+    bottom: 90px;
+    margin: 20px;
+    font-size: 12px;
+    width: 60%;
+}
