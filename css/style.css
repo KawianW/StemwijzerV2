@@ -4,7 +4,7 @@ body{
     background-repeat: no-repeat;
 }
 
-.whiteArea{
+.whiteArea {
     width: 45%;
     height: 450px;
     background-color: white;
@@ -12,11 +12,11 @@ body{
     margin-top: 25px;
     margin-left: 15%;
 }
-.innerContent{
+.innerContent {
     margin: 25px;
 }
 
-.StemwijzerLogo{
+.StemwijzerLogo {
     font-weight: 600;
     padding-top: 20px;
 }
@@ -25,15 +25,15 @@ h3.SubTitle {
     font-weight: 600;
 }
 
-.blueText{
+.blueText {
     color: #233fff;
 }
 
-.StartBtn{
+.StartBtn {
     margin-top: 20%;
 }
 
-.blackArea{
+.blackArea {
     width: 60%;
     height: 700px;
     background-color: rgba(0, 0, 0, 0.75);
@@ -83,4 +83,32 @@ p.privacy {
     margin: 20px;
     font-size: 12px;
     width: 60%;
+}
+/* Scenepagina---------------------------------------------- */
+
+#scenePage {
+    display: none;
+}
+
+.secondPageStyle {
+    background-color: white;
+    margin-top: 200px;
+    padding: 50px 25px 50px;
+    margin: 100px;
+    border-radius: 25px;
+    height: 300px;
+}
+
+#sceneSection {
+    padding-left: 110px;
+    padding-right: 110px;
+    padding-top: 20px;
+}
+
+#sceneDescription {
+    font-size: 12px;
+}
+
+#noOpinion:hover{
+    cursor: pointer;
 }

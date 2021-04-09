@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Stemwijzer</title>
 </head>
@@ -16,7 +17,7 @@
                     <h1 class="StemwijzerLogo"><span class="blueText">Stem</span>Wijzer</h1>
                     <h3 class="SubTitle">Tweede kamerverkiezingen 2021</h3>
                     <p class="explanation">Test je politieke voorkeur aan de hand van 30 stellingen</p>
-                    <button class="StartBtn w3-btn w3-blue w3-border w3-border-blue w3-round-large w3-xlarge">Start</button>
+                    <button id="startBtn" class="w3-btn w3-blue w3-border w3-border-blue w3-round-large w3-xlarge">Start</button>
                 </div>
             </section>
             <section class="blackArea">
@@ -138,7 +139,31 @@
             </section>
         </div>
     </div>
+    
+    <div class="w3-container content-wrapper secondPageStyle" id="scenePage">
+        <!-- <div id="scenePage"> -->
+            <div class="navigationBack w3-padding">
+                <button id="previousQuestion" class="w3-black w3-padding iconBack">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+            </div>
+            <section class="sceneSection">
+                <div class="opinionContainer">
+                    <h4 id="sceneTitle"></h4>
+                    <p id="sceneDescription"></p>
+                </div>
+                <div class="w3-left">
+                    <button id='pro' class="w3-button w3-round w3-border answerbtn w3-green" onclick="setAnswer('pro')">Eens</button>
+                    <button id='none' class="w3-button w3-round w3-border answerbtn" onclick="setAnswer('none')">Geen van beide</button>
+                    <button id='contra' class="w3-button w3-round w3-border answerbtn w3-red" onclick="setAnswer('contra')">Oneens</button>
+                </div>
+               <!-- moet hier naar de nextStatement -->
+                <a id="noOpinion" class="hoverEffect w3-text-grey w3-right">Sla deze vraag over <i class="fa fa-arrow-right"></i></a>
+            </section>
+        <!-- </div> -->
+    </div>
 </body>
-<script src="http://stemwijzer.dvc-icta.nl/data.js"></script>
+<!-- <script src="http://stemwijzer.dvc-icta.nl/data.js"></script> -->
 <script src="http://stemwijzer.dvc-icta.nl/testdata.js"></script>
+<script src="js/script.js"></script>
 </html>
