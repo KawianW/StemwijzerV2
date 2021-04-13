@@ -112,3 +112,11 @@ p.privacy {
 #noOpinion:hover{
     cursor: pointer;
 }
+
+.w3-black, .w3-hover-black:hover {
+    color: #000!important;
+    background-color: lightgray!important;
+    border-color: lightgray;
+    border-radius: 50%;
+    cursor: pointer;
+}
