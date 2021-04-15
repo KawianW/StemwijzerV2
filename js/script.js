@@ -13,6 +13,10 @@ subjects.forEach((subject) => {
   subject.myAnswer = "";
 });
 
+parties.forEach(party =>{
+    party.points = 0;
+  })
+
 function Start() {
   document.getElementById("homepage").style.display = "none";
   document.getElementById("scenePage").style.display = "block";
@@ -40,7 +44,10 @@ function nextStatement() {
     //Nieuwe stelling word geladen
     sceneTitle.innerHTML = subjects[statementOrder].title;
     sceneDescription.innerHTML = subjects[statementOrder].statement;
+    showAnswer(subjects[statementOrder].myAnswer);
   }
+  // Als die bij de laatste vraag is gaat het alle punten bij elkaar optellen
+  else (calculatePoints());
 }
 
 previousQuestionBtn.onclick = previousStatement;
@@ -66,11 +73,30 @@ function previousStatement() {
 var answerbtn = document.getElementsByClassName("answerbtn");
 function showAnswer(answer) {
   for (var f = 0; f < answerbtn.length; f++) {
-    answerbtn[f].style.background = "red";
+    answerbtn[f].style.background = "white";
   }
   if (answer == "") {
     return false;
   } else {
     document.getElementById(answer).style.background = "green";
   }
+}
+
+/**
+ * Deze functie zorgt er voor dat de punten bij elkaar worden opgeteld
+ */
+function calculatePoints() {
+    // Hier loop je door de subjects
+    for(var s = 0; s < subjects.length; s++) {
+        // Hier loop je door de subject partijen
+        for(var p = 0; p < subjects[s].parties.length; p++) {
+            // hier pak je je antwoord en vergelijk je antwoord met welke vraag je hebt beantwoord
+            if(subjects[s].myAnswer == subjects[s].parties[p].position) {
+                //hier worden de punten nij de partij getelt
+                var findParty = parties.find(party => party.name == subjects[s].parties[p].name);
+
+                findParty.points +=1;
+            }
+        }
+    }
 }
