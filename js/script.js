@@ -2,6 +2,9 @@
 const startButton = document.getElementById("startBtn");
 const noOpinionBtn = document.getElementById("noOpinion");
 const previousQuestionBtn = document.getElementById("previousQuestion");
+const proBtn = document.getElementById("pro");
+const noneBtn = document.getElementById("none");
+const contraBtn = document.getElementById("contra");
 var statementOrder = 0;
 var sceneTitle = document.getElementById("sceneTitle");
 var sceneDescription = document.getElementById("sceneDescription");
@@ -29,11 +32,16 @@ function Start() {
 /**
  * @param answer Is de keuze die je hebt gemaakt (pro, none, contra)
  */
+proBtn.onclick = setAnswer('pro');
+noneBtn.onclick = setAnswer('none');
+contraBtn.onclick = setAnswer('contra');
+
 function setAnswer(answer) {
   //De mening word toegevoegd aan answer
   subjects[statementOrder].myAnswer = answer;
   //Nieuwe functie word uitgevoerd
   nextStatement();
+  
 }
 
 noOpinionBtn.onclick = nextStatement;
@@ -100,3 +108,5 @@ function calculatePoints() {
         }
     }
 }
+
+
