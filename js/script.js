@@ -5,12 +5,20 @@ const previousQuestionBtn = document.getElementById("previousQuestion");
 const proBtn = document.getElementById("pro");
 const noneBtn = document.getElementById("none");
 const contraBtn = document.getElementById("contra");
+const secularParties = document.getElementById("")
+const homepage = document.getElementById("homepage");
+const scenePage = document.getElementById("scenePage");
+const importantCheckboxPage = document.getElementById("importantPage");
+// const nextBtn = document.getElementById("nextBtn");
+const importantStatements = document.getElementById("importantStatements");
 var statementOrder = 0;
 var sceneTitle = document.getElementById("sceneTitle");
 var sceneDescription = document.getElementById("sceneDescription");
 var answerQuistjion = [];
 
+
 startButton.onclick = start;
+// nextBtn.onclick = calculatePoints;
 
 subjects.forEach(subject=> {
   subject.myAnswer = '';
@@ -18,14 +26,14 @@ subjects.forEach(subject=> {
 
 parties.forEach(party =>{
   party.points = 0;
-})
+});
 
 /**
  * De Pagina met de vragen word geladen
  */
 function start() {
-  document.getElementById("homepage").style.display = "none";
-  document.getElementById("scenePage").style.display = "block";
+  homepage.style.display = "none";
+  scenePage.style.display = "block";
 
   //Zet de eerste vraag klaar
   sceneTitle.innerHTML = subjects[0].title;
@@ -63,7 +71,7 @@ function nextStatement(){
     showAnswer(subjects[statementOrder].myAnswer);
   }
   // Als die bij de laatste vraag is gaat het alle punten bij elkaar optellen
-  else (calculatePoints());
+  else (importantPage());
 }
 
 /**
@@ -82,8 +90,8 @@ previousQuestionBtn.onclick = previousStatement;
         showAnswer(subjects[statementOrder].myAnswer);
     }else{
       //Als ben je bij de laatste vraag wordt de home pagina weer getoond
-        document.getElementById("scenePage").style.display = "none";
-        document.getElementById("homepage").style.display = "block";
+      scenePage.style.display = "none";
+      homepage.style.display = "block";
     }
 }
 
@@ -103,10 +111,26 @@ function showAnswer(answer) {
   }
 }
 
+function importantPage() {
+  scenePage.style.display = "none";
+  importantCheckboxPage.style.display = "block";
+  console.log("check de box");
+  
+  subjects.forEach (checked => {
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.classList.add("checkBox");
+    importantCheckboxPage.appendChild(checkbox);
+    importantCheckboxPage.innerHTML += checked.title + "<br>";
+  });
+}
+
+
 /**
  * Deze functie zorgt er voor dat de punten bij elkaar worden opgeteld
  */
 function calculatePoints() {
+  console.log("hallo");
   //hier loop je door de subjects
   for(var s=0; s<subjects.length; s++) {
     //hier loop je door de subject partijen
@@ -116,12 +140,70 @@ function calculatePoints() {
         //hier worden de punten bij de partij getelt
         var findParty = parties.find(party => party.name == subjects[s].parties[p].name);
 
-        
+        var checkboxes = document.getElementsByClassName("checkBox");
+        // hier loop je door de checkbox array
+        if(checkboxes[s].checked == true) {
+          console.log(findParty);
+          findParty.points +=2;
+        } else {
           findParty.points +=1;
+        }
       }
     }
   }
+  displayPartyPage();
 }
 
+/**
+ * De pagina met een overzicht van de partijen in volgorde van de meeste punten word geladen
+ */
+ function displayPartyPage() {
+  //Nieuwe pagina word geladen
+  scenePage.style.display = "none";
+  document.getElementById("partyPage").style.display = "block";
+
+  //De partijen worden op volgorde gezet met de meeste punten
+  parties.sort((a, b) => b.points - a.points);
+  console.log(parties);
+
+  //Hier worden de partijen getoond
+  for(var s = 0; s <parties.length; s++) {
+    var p = document.createElement("p");
+    p.innerHTML = parties[s].name;
+    document.getElementById('partyOrder').appendChild(p);
+  }
+}
+
+/** 
+ * Deze functie word aangeroepen als de gebruiken alle partijen selecteerd 
+ */
+function getAllParties() {
+  checkSelectParty('all')
+  topParties = [];
+  topParties = parties;
+}
+
+/**
+ * Deze functie word aangeroepen als de gebruiken de zittende partijen selecteerd 
+ */
+
+function getSecularParties() {
+  checkSelectParty('secular')
+  topParties = [];
+  topParties = parties.filter(party=>{
+    return party.secular == true;
+  })
+}
+
+/** 
+ * Alleen de grote partijen worden geetoond
+ */
+function getBigParties() {
+  checkSelectParty('big')
+  topParties = [];
+  topParties = parties.filter(party=>{
+    return party.size >= bigParty;
+  })
+}
 
 

@@ -109,7 +109,7 @@ p.privacy {
     font-size: 12px;
 }
 
-#noOpinion:hover{
+#noOpinion:hover {
     cursor: pointer;
 }
 
@@ -119,4 +119,32 @@ p.privacy {
     border-color: lightgray;
     border-radius: 50%;
     cursor: pointer;
+}
+
+/* Important page---------------------------------------------------------- */
+
+#importantPage {
+    display: none;
+    background-image: none;
+    background-color: white;
+    padding: 2% 5%;
+    height: 300px;
+    width: calc(100% - 100px);
+    margin: 48px auto 0;
+    border-radius: 25px;
+    column-count: 3;
+}
+
+/* .importantStatements {
+    column-count: 3;
+} */
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Party Page-------------------------------------------------------------- */
+
+#partyPage{
+    display: none;
 }
