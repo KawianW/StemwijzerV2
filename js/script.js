@@ -5,7 +5,9 @@ const previousQuestionBtn = document.getElementById("previousQuestion");
 const proBtn = document.getElementById("pro");
 const noneBtn = document.getElementById("none");
 const contraBtn = document.getElementById("contra");
-const secularParties = document.getElementById("")
+const secularParties = document.getElementById("secular");
+const allParties = document.getElementById("all");
+const bigParties = document.getElementById("big");
 const homepage = document.getElementById("homepage");
 const scenePage = document.getElementById("scenePage");
 const importantCheckboxPage = document.getElementById("importantPage");
@@ -159,7 +161,7 @@ function calculatePoints() {
  */
  function displayPartyPage() {
   //Nieuwe pagina word geladen
-  scenePage.style.display = "none";
+  importantCheckboxPage.style.display = "none";
   document.getElementById("partyPage").style.display = "block";
 
   //De partijen worden op volgorde gezet met de meeste punten
@@ -177,6 +179,7 @@ function calculatePoints() {
 /** 
  * Deze functie word aangeroepen als de gebruiken alle partijen selecteerd 
  */
+allParties.onclick = getAllParties;
 function getAllParties() {
   checkSelectParty('all')
   topParties = [];
@@ -186,7 +189,7 @@ function getAllParties() {
 /**
  * Deze functie word aangeroepen als de gebruiken de zittende partijen selecteerd 
  */
-
+secularParties.onclick = getSecularParties;
 function getSecularParties() {
   checkSelectParty('secular')
   topParties = [];
@@ -198,6 +201,7 @@ function getSecularParties() {
 /** 
  * Alleen de grote partijen worden geetoond
  */
+bigParties.onclick = getBigParties;
 function getBigParties() {
   checkSelectParty('big')
   topParties = [];

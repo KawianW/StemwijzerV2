@@ -147,4 +147,10 @@ input[type="checkbox"] {
 
 #partyPage{
     display: none;
+    background-color: white;
+    margin-top: 200px;
+    padding: 50px 25px 50px;
+    margin: 100px;
+    border-radius: 25px;
+    height: 500px;
 }
