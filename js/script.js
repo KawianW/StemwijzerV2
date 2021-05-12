@@ -11,22 +11,24 @@ const bigParties = document.getElementById("big");
 const homepage = document.getElementById("homepage");
 const scenePage = document.getElementById("scenePage");
 const importantCheckboxPage = document.getElementById("importantPage");
+const partyPage = document.getElementById("partyPage");
+const resultPageBtn = document.getElementById("showResultPage");
 // const nextBtn = document.getElementById("nextBtn");
 const importantStatements = document.getElementById("importantStatements");
 var statementOrder = 0;
 var sceneTitle = document.getElementById("sceneTitle");
 var sceneDescription = document.getElementById("sceneDescription");
-var answerQuistjion = [];
-
+var topParties = [];
+var bigParty = 10;
 
 startButton.onclick = start;
 // nextBtn.onclick = calculatePoints;
 
-subjects.forEach(subject=> {
-  subject.myAnswer = '';
+subjects.forEach((subject) => {
+  subject.myAnswer = "";
 });
 
-parties.forEach(party =>{
+parties.forEach((party) => {
   party.points = 0;
 });
 
@@ -45,10 +47,15 @@ function start() {
  * @param answer De keuze die je hebt gemaakt (pro, none, contra)
  */
 
- proBtn.onclick = function() {setAnswer('pro')};
- noneBtn.onclick = function() {setAnswer('none')};
- contraBtn.onclick = function() {setAnswer('contra')};
- 
+proBtn.onclick = function () {
+  setAnswer("pro");
+};
+noneBtn.onclick = function () {
+  setAnswer("none");
+};
+contraBtn.onclick = function () {
+  setAnswer("contra");
+};
 
 function setAnswer(answer) {
   //De mening word toegevoegd aan answer
@@ -57,15 +64,14 @@ function setAnswer(answer) {
   nextStatement();
 }
 
-
 /**
  * Nieuwe stelling word geladen, wanneer je bij de laatste vraag bent word er een functie aangeroepen.
  */
 
- noOpinionBtn.onclick = nextStatement;
+noOpinionBtn.onclick = nextStatement;
 
-function nextStatement(){
-  if(statementOrder < subjects.length -1){
+function nextStatement() {
+  if (statementOrder < subjects.length - 1) {
     statementOrder++;
     //Nieuwe stelling word geladen
     sceneTitle.innerHTML = subjects[statementOrder].title;
@@ -73,28 +79,28 @@ function nextStatement(){
     showAnswer(subjects[statementOrder].myAnswer);
   }
   // Als die bij de laatste vraag is gaat het alle punten bij elkaar optellen
-  else (importantPage());
+  else importantPage();
 }
 
 /**
- * Als de gebruiker op het pijltje terug klikt dan word de vorige vraag geladen 
+ * Als de gebruiker op het pijltje terug klikt dan word de vorige vraag geladen
  */
 
 previousQuestionBtn.onclick = previousStatement;
 
-  function previousStatement(){
-    console.log(statementOrder);
-    if(statementOrder !== 0){
-        statementOrder--;
-        //Oude stelling word geladen
-        sceneTitle.innerHTML = subjects[statementOrder].title;
-        sceneDescription.innerHTML = subjects[statementOrder].statement;
-        showAnswer(subjects[statementOrder].myAnswer);
-    }else{
-      //Als ben je bij de laatste vraag wordt de home pagina weer getoond
-      scenePage.style.display = "none";
-      homepage.style.display = "block";
-    }
+function previousStatement() {
+  console.log(statementOrder);
+  if (statementOrder !== 0) {
+    statementOrder--;
+    //Oude stelling word geladen
+    sceneTitle.innerHTML = subjects[statementOrder].title;
+    sceneDescription.innerHTML = subjects[statementOrder].statement;
+    showAnswer(subjects[statementOrder].myAnswer);
+  } else {
+    //Als ben je bij de laatste vraag wordt de home pagina weer getoond
+    scenePage.style.display = "none";
+    homepage.style.display = "block";
+  }
 }
 
 /**
@@ -102,53 +108,52 @@ previousQuestionBtn.onclick = previousStatement;
  * @param answer de mening die je hebt ingevoerd
  */
 function showAnswer(answer) {
-  var answerbtn = document.getElementsByClassName('answerbtn');
-  for(var f = 0; f < answerbtn.length; f++) {
-    answerbtn[f].style.background = 'white';
+  var answerbtn = document.getElementsByClassName("answerbtn");
+  for (var f = 0; f < answerbtn.length; f++) {
+    answerbtn[f].style.background = "white";
   }
-  if(answer == ''){
-    return
+  if (answer == "") {
+    return;
   } else {
-    document.getElementById(answer).style.background = 'green';
+    document.getElementById(answer).style.background = "green";
   }
 }
 
 function importantPage() {
   scenePage.style.display = "none";
   importantCheckboxPage.style.display = "block";
-  console.log("check de box");
-  
-  subjects.forEach (checked => {
+
+  subjects.forEach((checked) => {
     var checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.classList.add("checkBox");
-    importantCheckboxPage.appendChild(checkbox);
-    importantCheckboxPage.innerHTML += checked.title + "<br>";
+    importantStatements.appendChild(checkbox);
+    importantStatements.innerHTML += checked.title + "<br>";
   });
 }
-
 
 /**
  * Deze functie zorgt er voor dat de punten bij elkaar worden opgeteld
  */
 function calculatePoints() {
-  console.log("hallo");
   //hier loop je door de subjects
-  for(var s=0; s<subjects.length; s++) {
+  for (var s = 0; s < subjects.length; s++) {
     //hier loop je door de subject partijen
-    for(var p=0; p<subjects[s].parties.length; p++) {
+    for (var p = 0; p < subjects[s].parties.length; p++) {
       // hier pak je je antwoord en vergelijk je antwoord met welke vraag je hebt beantwoord
-      if(subjects[s].myAnswer == subjects[s].parties[p].position) {
+      if (subjects[s].myAnswer == subjects[s].parties[p].position) {
         //hier worden de punten bij de partij getelt
-        var findParty = parties.find(party => party.name == subjects[s].parties[p].name);
+        var findParty = parties.find(
+          (party) => party.name == subjects[s].parties[p].name
+        );
 
         var checkboxes = document.getElementsByClassName("checkBox");
         // hier loop je door de checkbox array
-        if(checkboxes[s].checked == true) {
+        if (checkboxes[s].checked == true) {
           console.log(findParty);
-          findParty.points +=2;
+          findParty.points += 2;
         } else {
-          findParty.points +=1;
+          findParty.points += 1;
         }
       }
     }
@@ -159,55 +164,49 @@ function calculatePoints() {
 /**
  * De pagina met een overzicht van de partijen in volgorde van de meeste punten word geladen
  */
- function displayPartyPage() {
+function displayPartyPage() {
   //Nieuwe pagina word geladen
   importantCheckboxPage.style.display = "none";
-  document.getElementById("partyPage").style.display = "block";
+  partyPage.style.display = "block";
 
   //De partijen worden op volgorde gezet met de meeste punten
   parties.sort((a, b) => b.points - a.points);
   console.log(parties);
 
   //Hier worden de partijen getoond
-  for(var s = 0; s <parties.length; s++) {
-    var p = document.createElement("p");
-    p.innerHTML = parties[s].name;
-    document.getElementById('partyOrder').appendChild(p);
+    
+    for(s = 0; s < parties.length; s++) {
+      var checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.classList.add("checkBox");
+      partyPage.appendChild(checkbox);
+      partyPage.innerHTML += parties[s].name + "<br>";
+    }
   }
-}
 
-/** 
- * Deze functie word aangeroepen als de gebruiken alle partijen selecteerd 
+/**
+ * Deze functie word aangeroepen als de gebruiken alle partijen selecteerd
  */
 allParties.onclick = getAllParties;
 function getAllParties() {
-  checkSelectParty('all')
+  checkSelectParty("all");
   topParties = [];
   topParties = parties;
 }
 
 /**
- * Deze functie word aangeroepen als de gebruiken de zittende partijen selecteerd 
+ * Deze functie word aangeroepen als de gebruiken de zittende partijen selecteerd
  */
 secularParties.onclick = getSecularParties;
 function getSecularParties() {
-  checkSelectParty('secular')
+  checkSelectParty("secular");
   topParties = [];
-  topParties = parties.filter(party=>{
+  topParties = parties.filter((party) => {
     return party.secular == true;
-  })
+  });
 }
 
-/** 
- * Alleen de grote partijen worden geetoond
- */
-bigParties.onclick = getBigParties;
-function getBigParties() {
-  checkSelectParty('big')
-  topParties = [];
-  topParties = parties.filter(party=>{
-    return party.size >= bigParty;
-  })
+function displayResultPage() {
+  document.getElementById("partyPage").style.display = "none";
+  document.getElementById("resultContainer").style.display = "block";
 }
-
-

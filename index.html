@@ -201,24 +201,38 @@
         <button id="nextBtn" onclick="calculatePoints()" class="w3-btn w3-blue w3-border w3-border-blue w3-round-large w3-xlarge">Volgende stap</button>
 
 
-        <div class="importantStatements">
-
+        <div id="importantStatements">
+          <p></p>
         </div>
     </section>
 
     <section id="partyPage" class="partyPage">
         <h3>Welke partijen wilt u meenemen in het resultaat?</h3>
         <p>U kunt kiezen voor de zittende partijen, die nu in de Tweede Kamer vertegenwoordigd zijn. Daarbij nemen we ook de partijen mee die in de peilingen op minimaal één zetel staan. U kunt alle partijen meenemen en u kunt een eigen selectie maken van tenminste drie partijen.</p>
-        <button id="showResultPage" class="w3-button w3-round w3-border">Naar resultaat gaan</button>
         <button id="secular" class="w3-button w3-round w3-border filterParty">Seculaire partijen</button>
         <button id="all" class="w3-button w3-round w3-border filterParty"> Alle partijen</button>
-        <button id="big" class="w3-button w3-round w3-border filterParty">Grote partijen</button>
+        <button id="showResultPage" onclick="displayResultPage()" class="w3-button w3-round w3-border">Naar resultaat gaan</button>
         <div class="w3-row w3-center">
           <div class="w3-col s4">
             <div class="w3-left-align" id="partyOrder"></div>
           </div>
         </div>
     </section>
+
+    <section id="resultContainer">
+      <h3 class="resultTitle">Resultaat</h3>
+      <div class="placeContainer">
+          <div class="place">
+             <h3 id="1stPlace">1. </h3>
+          </div>
+          <div class="place">
+             <h3 id="2ndPlace">2. </h3>
+          </div>
+          <div class="place">
+             <h3 id="3rdPlace">3. </h3>
+          </div>
+      </div>
+  </section>
   </body>
   <!-- <script src="http://stemwijzer.dvc-icta.nl/data.js"></script> -->
   <script src="http://stemwijzer.dvc-icta.nl/testdata.js"></script>

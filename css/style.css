@@ -132,12 +132,11 @@ p.privacy {
     width: calc(100% - 100px);
     margin: 48px auto 0;
     border-radius: 25px;
-    column-count: 3;
 }
 
-/* .importantStatements {
-    column-count: 3;
-} */
+.importantStatements {
+    width: calc(100% / 3);
+}
 
 input[type="checkbox"] {
     margin-right: 5px;
@@ -146,6 +145,16 @@ input[type="checkbox"] {
 /* Party Page-------------------------------------------------------------- */
 
 #partyPage{
+    display: none;
+    background-color: white;
+    margin-top: 200px;
+    padding: 50px 25px 50px;
+    margin: 100px;
+    border-radius: 25px;
+    height: 500px;
+}
+
+#resultContainer {
     display: none;
     background-color: white;
     margin-top: 200px;
