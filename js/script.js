@@ -22,7 +22,6 @@ var topParties = [];
 var bigParty = 10;
 
 startButton.onclick = start;
-// nextBtn.onclick = calculatePoints;
 
 subjects.forEach((subject) => {
   subject.myAnswer = "";
@@ -67,7 +66,6 @@ function setAnswer(answer) {
 /**
  * Nieuwe stelling word geladen, wanneer je bij de laatste vraag bent word er een functie aangeroepen.
  */
-
 noOpinionBtn.onclick = nextStatement;
 
 function nextStatement() {
@@ -85,7 +83,6 @@ function nextStatement() {
 /**
  * Als de gebruiker op het pijltje terug klikt dan word de vorige vraag geladen
  */
-
 previousQuestionBtn.onclick = previousStatement;
 
 function previousStatement() {
@@ -118,7 +115,9 @@ function showAnswer(answer) {
     document.getElementById(answer).style.background = "green";
   }
 }
-
+/**
+ * 
+ */
 function importantPage() {
   scenePage.style.display = "none";
   importantCheckboxPage.style.display = "block";
@@ -146,7 +145,7 @@ function calculatePoints() {
         var findParty = parties.find(
           (party) => party.name == subjects[s].parties[p].name
         );
-
+          //hier maak ik de checkboxen aan
         var checkboxes = document.getElementsByClassName("checkBox");
         // hier loop je door de checkbox array
         if (checkboxes[s].checked == true) {
@@ -174,13 +173,17 @@ function displayPartyPage() {
   console.log(parties);
 
   //Hier worden de partijen getoond
-    
     for(s = 0; s < parties.length; s++) {
       var checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
       checkbox.classList.add("checkBox");
       partyPage.appendChild(checkbox);
       partyPage.innerHTML += parties[s].name + "<br>";
+    }
+    var checkboxes = document.getElementsByClassName("checkBox");
+    for(k = 0; k < parties.length; k++)
+    if(checkboxes[k].checked == true) {
+      checkboxes[k]
     }
   }
 
@@ -206,7 +209,26 @@ function getSecularParties() {
   });
 }
 
+/** 
+ * De kleur van de knop word veranderd al klik je op een van de knoppen
+ * @param partyID de value van de knop 
+ */
+ function checkSelectParty(partyID) {
+  for(var f = 0; f <document.getElementsByClassName('filterParty').length; f++) {
+    document.getElementsByClassName('filterParty')[f].style.background = 'white';
+  }
+  document.getElementById(partyID).style.background = 'green';
+}
+
+/** 
+ * De Resultaat pagina word geladen 
+ */
 function displayResultPage() {
+
   document.getElementById("partyPage").style.display = "none";
   document.getElementById("resultContainer").style.display = "block";
+  //De top 3 partijen worden laten zien
+  document.getElementById('1stPlace').innerHTML += topParties[0].name;
+  document.getElementById('2ndPlace').innerHTML += topParties[1].name;
+  document.getElementById('3rdPlace').innerHTML += topParties[2].name;
 }
