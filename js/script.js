@@ -12,14 +12,14 @@ const homepage = document.getElementById("homepage");
 const scenePage = document.getElementById("scenePage");
 const importantCheckboxPage = document.getElementById("importantPage");
 const partyPage = document.getElementById("partyPage");
+const placeContainer = document.getElementById("placeContainer");
 const resultPageBtn = document.getElementById("showResultPage");
 // const nextBtn = document.getElementById("nextBtn");
 const importantStatements = document.getElementById("importantStatements");
+var partyPlace = document.getElementsByClassName("place");
 var statementOrder = 0;
 var sceneTitle = document.getElementById("sceneTitle");
 var sceneDescription = document.getElementById("sceneDescription");
-var topParties = [];
-var bigParty = 10;
 
 startButton.onclick = start;
 
@@ -125,7 +125,7 @@ function importantPage() {
   subjects.forEach((checked) => {
     var checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
-    checkbox.classList.add("checkBox");
+    checkbox.classList.add("subjectCheckBox");
     importantStatements.appendChild(checkbox);
     importantStatements.innerHTML += checked.title + "<br>";
   });
@@ -146,7 +146,7 @@ function calculatePoints() {
           (party) => party.name == subjects[s].parties[p].name
         );
           //hier maak ik de checkboxen aan
-        var checkboxes = document.getElementsByClassName("checkBox");
+        var checkboxes = document.getElementsByClassName("subjectCheckBox");
         // hier loop je door de checkbox array
         if (checkboxes[s].checked == true) {
           console.log(findParty);
@@ -176,49 +176,11 @@ function displayPartyPage() {
     for(s = 0; s < parties.length; s++) {
       var checkbox = document.createElement("input");
       checkbox.setAttribute("type", "checkbox");
-      checkbox.classList.add("checkBox");
+      checkbox.classList.add("partyCheckBox");
       partyPage.appendChild(checkbox);
       partyPage.innerHTML += parties[s].name + "<br>";
     }
-    var checkboxes = document.getElementsByClassName("checkBox");
-    for(k = 0; k < parties.length; k++)
-    if(checkboxes[k].checked == true) {
-      checkboxes[k]
-    }
   }
-
-/**
- * Deze functie word aangeroepen als de gebruiken alle partijen selecteerd
- */
-allParties.onclick = getAllParties;
-function getAllParties() {
-  checkSelectParty("all");
-  topParties = [];
-  topParties = parties;
-}
-
-/**
- * Deze functie word aangeroepen als de gebruiken de zittende partijen selecteerd
- */
-secularParties.onclick = getSecularParties;
-function getSecularParties() {
-  checkSelectParty("secular");
-  topParties = [];
-  topParties = parties.filter((party) => {
-    return party.secular == true;
-  });
-}
-
-/** 
- * De kleur van de knop word veranderd al klik je op een van de knoppen
- * @param partyID de value van de knop 
- */
- function checkSelectParty(partyID) {
-  for(var f = 0; f <document.getElementsByClassName('filterParty').length; f++) {
-    document.getElementsByClassName('filterParty')[f].style.background = 'white';
-  }
-  document.getElementById(partyID).style.background = 'green';
-}
 
 /** 
  * De Resultaat pagina word geladen 
@@ -227,8 +189,31 @@ function displayResultPage() {
 
   document.getElementById("partyPage").style.display = "none";
   document.getElementById("resultContainer").style.display = "block";
-  //De top 3 partijen worden laten zien
-  document.getElementById('1stPlace').innerHTML += topParties[0].name;
-  document.getElementById('2ndPlace').innerHTML += topParties[1].name;
-  document.getElementById('3rdPlace').innerHTML += topParties[2].name;
+
+  var checkboxes = document.getElementsByClassName("partyCheckBox");
+  var selectedParties = [];
+  // doel: top 3 geselcteerde partijen laten zien
+  // stappen:
+  // 1. uitvogelen welke we hebben geselecteerd
+  // 2. deze partijen laten zien op de html pagina
+  for(c = 0; c < checkboxes.length; c++) {
+    if(checkboxes[c].checked == true) {
+      selectedParties.push(parties[c].name)
+    }
+  }
+  for(partyIndex = 0; partyIndex < selectedParties.length; partyIndex++) {
+    var partyElement = document.createElement("p");
+    placeContainer.appendChild(partyElement);
+    partyElement.innerHTML = selectedParties[partyIndex];
+    console.log(placeContainer);
+  }
+  console.log(selectedParties);
+
+    // for(c = 0; c <= 2; c++){
+    //   if(checkboxes.checked == true){
+    //     selectedParties.push(checkboxes[c].name)
+    //     partyPlace[c].innerHTML += selectedParties[c]
+    //     console.log(selectedParties);
+    //   }
+    // }
 }
