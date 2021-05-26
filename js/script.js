@@ -5,9 +5,6 @@ const previousQuestionBtn = document.getElementById("previousQuestion");
 const proBtn = document.getElementById("pro");
 const noneBtn = document.getElementById("none");
 const contraBtn = document.getElementById("contra");
-const secularParties = document.getElementById("secular");
-const allParties = document.getElementById("all");
-const bigParties = document.getElementById("big");
 const homepage = document.getElementById("homepage");
 const scenePage = document.getElementById("scenePage");
 const importantCheckboxPage = document.getElementById("importantPage");
@@ -20,6 +17,8 @@ var partyPlace = document.getElementsByClassName("place");
 var statementOrder = 0;
 var sceneTitle = document.getElementById("sceneTitle");
 var sceneDescription = document.getElementById("sceneDescription");
+var clicked = false;
+
 
 startButton.onclick = start;
 
@@ -116,11 +115,15 @@ function showAnswer(answer) {
   }
 }
 /**
- * 
+ * Hier word gelelen welke statement important is
  */
 function importantPage() {
   scenePage.style.display = "none";
   importantCheckboxPage.style.display = "block";
+ 
+  /**
+   * @param checked kijkt of de checkbox gechecked is of niet
+   */
 
   subjects.forEach((checked) => {
     var checkbox = document.createElement("input");
@@ -181,6 +184,13 @@ function displayPartyPage() {
       partyPage.innerHTML += parties[s].name + "<br>";
     }
   }
+  function selectAllParties(){
+    clicked =! clicked;
+    var checkboxes = document.getElementsByClassName("partyCheckBox");
+    for(a = 0; a < parties.length; a++) {
+      checkboxes[a].checked = clicked;
+    }
+  }
 
 /** 
  * De Resultaat pagina word geladen 
@@ -196,24 +206,19 @@ function displayResultPage() {
   // stappen:
   // 1. uitvogelen welke we hebben geselecteerd
   // 2. deze partijen laten zien op de html pagina
+  // Forloop kijkt welke ckeckbox is aangeklikt
   for(c = 0; c < checkboxes.length; c++) {
     if(checkboxes[c].checked == true) {
       selectedParties.push(parties[c].name)
     }
   }
+  // Forloop zorgt ervoor dat alle gecheckte partijen te zien worden
   for(partyIndex = 0; partyIndex < selectedParties.length; partyIndex++) {
     var partyElement = document.createElement("p");
     placeContainer.appendChild(partyElement);
     partyElement.innerHTML = selectedParties[partyIndex];
     console.log(placeContainer);
   }
-  console.log(selectedParties);
 
-    // for(c = 0; c <= 2; c++){
-    //   if(checkboxes.checked == true){
-    //     selectedParties.push(checkboxes[c].name)
-    //     partyPlace[c].innerHTML += selectedParties[c]
-    //     console.log(selectedParties);
-    //   }
-    // }
+  console.log(selectedParties);
 }
